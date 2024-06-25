@@ -195,6 +195,7 @@ function set-omz-theme-during-precmd {
   [[ -o interactive ]] && [[ -n "$ZSH_THEME" ]] || return
 
   # Load prompt pre-reqs
+  (( $+functions[_omz_register_handler] ))   || source $ZSH/lib/async_prompt.zsh
   [[ -v FX ]] && [[ -v FG ]] && [[ -v BG ]]  || source $ZSH/lib/spectrum.zsh
   (( $+function[colors] )) &&
     [[ -v ZSH_THEME_GIT_PROMPT_PREFIX ]]     || source $ZSH/lib/theme-and-appearance.zsh
@@ -299,6 +300,7 @@ function git_prompt_info \
   git_current_user_email \
   git_repo_name \
 {
+  (( $+functions[_omz_register_handler] )) || source $ZSH/lib/async_prompt.zsh
   source $ZSH/lib/git.zsh
   "$0" "$@"
 }

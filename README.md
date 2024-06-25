@@ -1,6 +1,6 @@
 # antidote-use-omz
 
-> A Zsh plugin to make using Oh-My-Zsh with antidote easier.
+> A Zsh plugin to make using Oh-My-Zsh with antidote seamless.
 
 The Zsh plugin manager [antidote][antidote] can be used to load subplugins, such as those included in frameworks like Prezto and [Oh-My-Zsh][omz]. However, it doesn't have specific logic to treat these popular frameworks different than any other plugin. With projects like Oh-My-Zsh (aka: OMZ) that have a lot of dependencies on itself, and aren't expecting to be loaded any way other than the documented default, that can be a problem.
 

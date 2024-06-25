@@ -1,0 +1,5 @@
+missing features:
+	- There's now support in OMZ for adding a zstyle to disable aliases. This may be difficult to support since antidote loads the plugins, but perhaps done via a function/hook.
+
+tests:
+	- Test more (every??) plugin will load properly.

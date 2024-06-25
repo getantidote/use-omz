@@ -25,6 +25,9 @@ function is-true {
 
 # Ensure fpath does not contain duplicates.
 typeset -gU fpath
+
+# OMZ uses this extensively
+autoload -Uz is-at-least
 #endregion
 
 #region Set $ZSH
@@ -197,5 +200,50 @@ function run-compinit {
       fi
     fi
   } &!
+}
+#endregion
+
+#region Lazy-loaded OMZ libs
+(( $+functions[_omz_register_handler] )) ||
+function _omz_register_handler _omz_async_request _omz_async_callback {
+  source $ZSH/lib/async_prompt.zsh
+  "$0" "$@"
+}
+
+(( $+functions[bzr_prompt_info] )) ||
+function bzr_prompt_info {
+  source $ZSH/lib/bzr.zsh
+  "$0" "$@"
+}
+
+(( $+functions[detect-clipboard] )) ||
+function detect-clipboard clipcopy clippaste {
+  source $ZSH/lib/clipboard.zsh
+  detect-clipboard || true # let one retry
+  "$0" "$@"
+}
+
+(( $+functions[nvm_prompt_info] )) ||
+function nvm_prompt_info {
+  source $ZSH/lib/nvm.zsh
+  "$0" "$@"
+}
+
+(( $+functions[rvm_prompt_info] )) ||
+function chruby_prompt_info \
+  rbenv_prompt_info \
+  hg_prompt_info \
+  pyenv_prompt_info \
+  svn_prompt_info \
+  vi_mode_prompt_info \
+  virtualenv_prompt_info \
+  jenv_prompt_info \
+  azure_prompt_info \
+  tf_prompt_info \
+  rvm_prompt_info \
+  ruby_prompt_info \
+{
+  source $ZSH/lib/prompt_info_functions.zsh
+  "$0" "$@"
 }
 #endregion

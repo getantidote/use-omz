@@ -1,0 +1,53 @@
+#!/usr/bin/env zsh
+setopt extended_glob
+
+0=${(%):-%N}
+PRJHOME=${0:A:h:h:h}
+ZSH=$PRJHOME/.oh-my-zsh
+
+plugins=($ZSH/plugins/*(:t))
+compdef_plugin_files=($(rg -l 'compdef' $ZSH/plugins/*/*.plugin.zsh | sort))
+compdef_plugins=()
+for file in $compdef_plugin_files; do
+  compdef_plugins+=($file:t:r:r)
+done
+
+test_md() {
+  local plugin=$1
+  cat <<EOF
+# OMZ plugin: $plugin
+
+## Setup
+
+\`\`\`zsh
+% source ./tests/__init__.zsh
+% t_setup
+%
+\`\`\`
+
+\`\`\`zsh
+% source \$ZSH/plugins/$plugin/${plugin}.plugin.zsh 2>&1 | subenv ZSH
+%
+\`\`\`
+
+\`\`\`zsh
+% source antidote-use-omz.plugin.zsh
+% plugin-load $plugin
+%
+\`\`\`
+
+## Teardown
+
+\`\`\`zsh
+% source ./tests/__init__.zsh
+% t_teardown
+%
+\`\`\`
+EOF
+}
+
+for plugin in $compdef_plugins[1,10]; do
+  if [[ -r $ZSH/plugins/$plugin/${plugin}.plugin.zsh ]]; then
+  	test_md $plugin > $PRJHOME/tests/test_${plugin}.md
+  fi
+done

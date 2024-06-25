@@ -13,11 +13,6 @@
 #region init and helpers
 0=${(%):-%N}
 
-##? Check if a name is a command, function, or alias.
-function is-callable {
-  (( $+commands[$1] || $+functions[$1] || $+aliases[$1] || $+builtins[$1] ))
-}
-
 ##? Check a string for case-insensitive "true" value (1,y,yes,t,true,on).
 function is-true {
   [[ -n "$1" && "$1:l" == (1|y(es|)|t(rue|)|on) ]]
@@ -41,16 +36,17 @@ fi
 # Make sure we know where antidote keeps OMZ.
 () {
   [[ -z "$ZSH" ]] || return
-  if ! is-callable antidote; then
+  if (( $+commands[$antidote] || $+functions[$antidote] )); then
+    export ZSH=$(antidote path ohmyzsh/ohmyzsh)
+  else
     echo >&2 "antidote-use-omz: antidote command not found."
     return 1
   fi
-  export ZSH=$(antidote path ohmyzsh/ohmyzsh)
 }
 
 # Make sure we have Oh-My-Zsh cloned.
 if [[ ! -d $ZSH ]]; then
-  echo "antidote-use-omz: oh-my-zsh not found, or \$ZSH not properly set."
+  echo >&2 "antidote-use-omz: oh-my-zsh not found, or \$ZSH not properly set."
   return 1
 fi
 #endregion

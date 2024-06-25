@@ -201,8 +201,9 @@ function bzr_prompt_info {
 
 (( $+functions[detect-clipboard] )) ||
 function detect-clipboard clipcopy clippaste {
+  unfunction detect-clipboard
   source $ZSH/lib/clipboard.zsh
-  detect-clipboard || true # let one retry
+  detect-clipboard
   "$0" "$@"
 }
 

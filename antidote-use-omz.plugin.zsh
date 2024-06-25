@@ -32,7 +32,7 @@ autoload -Uz is-at-least
 ### BUGFIX:
 # OMZ has current regression: https://github.com/ohmyzsh/ohmyzsh/issues/12328#issuecomment-2043492331
 # If async isn't explicitly set to 'yes', make it 'no' for now.
-if ! zstyle -t ':omz:alpha:lib:git' async-prompt
+if ! zstyle -t ':omz:alpha:lib:git' async-prompt; then
   zstyle ':omz:alpha:lib:git' async-prompt no
 fi
 #endregion

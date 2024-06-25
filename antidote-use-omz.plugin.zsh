@@ -36,7 +36,7 @@ fi
 # Make sure we know where antidote keeps OMZ.
 () {
   [[ -z "$ZSH" ]] || return
-  if (( $+commands[$antidote] || $+functions[$antidote] )); then
+  if (( $+commands[antidote] || $+functions[antidote] )); then
     export ZSH=$(antidote path ohmyzsh/ohmyzsh)
   else
     echo >&2 "antidote-use-omz: antidote command not found."

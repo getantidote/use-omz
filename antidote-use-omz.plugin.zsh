@@ -207,6 +207,16 @@ function detect-clipboard clipcopy clippaste {
   "$0" "$@"
 }
 
+(( $+functions[open_command] )) ||
+function env_default \
+  open_command \
+  omz_urldecode \
+  omz_urlencode \
+{
+  source $ZSH/lib/functions.zsh
+  "$0" "$@"
+}
+
 (( $+functions[nvm_prompt_info] )) ||
 function nvm_prompt_info {
   source $ZSH/lib/nvm.zsh

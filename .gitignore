@@ -2,4 +2,5 @@
 *.zwc
 *.zwc.old
 .oh-my-zsh/
+gen/
 foo*.*

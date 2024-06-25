@@ -8,7 +8,7 @@ testfiles=()
 if (( $# > 0 )); then
   testfiles=($@)
 else
-  testfiles=($PWD/tests/test_*.md)
+  testfiles=($PWD/tests/**/test_*.md)
 fi
 
 # foo example test command

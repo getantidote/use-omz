@@ -4,6 +4,7 @@ setopt extended_glob
 0=${(%):-%N}
 PRJHOME=${0:A:h:h:h}
 ZSH=$PRJHOME/.oh-my-zsh
+[[ -d $ZSH ]] || git clone https://github.com/ohmyzsh/ohmyzsh $ZSH
 
 plugins=($ZSH/plugins/*(:t))
 compdef_plugin_files=($(rg -l 'compdef' $ZSH/plugins/*/*.plugin.zsh | sort))
@@ -17,37 +18,20 @@ test_md() {
   cat <<EOF
 # OMZ plugin: $plugin
 
-## Setup
-
 \`\`\`zsh
 % source ./tests/__init__.zsh
 % t_setup
-%
-\`\`\`
-
-\`\`\`zsh
-% source \$ZSH/plugins/$plugin/${plugin}.plugin.zsh 2>&1 | subenv ZSH
-%
-\`\`\`
-
-\`\`\`zsh
 % source antidote-use-omz.plugin.zsh
-% plugin-load $plugin
-%
-\`\`\`
-
-## Teardown
-
-\`\`\`zsh
-% source ./tests/__init__.zsh
+% source \$ZSH/lib/*.zsh
+% plugin-load $plugin 2>&1 | subenv ZSH
 % t_teardown
 %
 \`\`\`
 EOF
 }
 
-for plugin in $compdef_plugins[1,10]; do
+for plugin in $compdef_plugins; do
   if [[ -r $ZSH/plugins/$plugin/${plugin}.plugin.zsh ]]; then
-  	test_md $plugin > $PRJHOME/tests/test_${plugin}.md
+  	test_md $plugin > $PRJHOME/tests/gen/test_${plugin}.md
   fi
 done

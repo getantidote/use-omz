@@ -42,10 +42,11 @@ Here's a more complete .zsh_plugins.txt you can use as a starter config.
 
 ```zsh
 #
-# .zsh_plugins.txt: antidote plugins
+# ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 #
 
-# If you use OMZ with antidote, load this plugin FIRST to set things up so you don't have to worry about whether Oh-My-Zsh will work correctly.
+# If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you
+# don't have to worry about whether OMZ will work correctly.
 mattmc3/antidote-use-omz
 
 # Regarding OMZ libs - you may decide to use all of OMZ's lib like so:

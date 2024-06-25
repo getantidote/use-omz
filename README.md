@@ -100,6 +100,14 @@ zdharma-continuum/fast-syntax-highlighting
 # ... etc ...
 ```
 
+## Differences
+
+A quick note on differences in behavior between OMZ and antidote-use-omz:
+
+- Oh-My-Zsh by default checks the security of directories in `fpath` when running `compinit`. This feature can cause slower performance, and can be disabled by setting `ZSH_DISABLE_COMPFIX=true`. If `ZSH_DISABLE_COMPFIX` isn't set at all, the default audit is performed. antidote-use-omz reverses this default behavior, so to re-enable it you should explicitly set `ZSH_DISABLE_COMPFIX=false`.
+
+- Oh-My-Zsh by default embeds metadata information in the `$ZSH_COMPDUMP` file. The way it does this is slow, so antidote-use-omz saves metadata in a separate cache file as a performance optimization.
+
 [antidote]:   https://github.com/mattmc3/antidote
 [omz]:        https://github.com/ohmyzsh/ohmyzsh
 [zsh-bench]:  https://github.com/romkatv/zsh-bench

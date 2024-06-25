@@ -187,18 +187,39 @@ function run-compinit {
 #endregion
 
 #region Lazy-loaded OMZ libs
+# Leave for user to decide to load or not:
+# lib/completion.zsh
+# lib/correction.zsh
+# lib/diagnostics.zsh
+# lib/directories.zsh
+# lib/grep.zsh
+# lib/history.zsh
+# lib/key-bindings.zsh
+# lib/misc.zsh
+# lib/termsupport.zsh
+
+# lib/async_prompt.zsh
 (( $+functions[_omz_register_handler] )) ||
 function _omz_register_handler _omz_async_request _omz_async_callback {
   source $ZSH/lib/async_prompt.zsh
   "$0" "$@"
 }
 
+# lib/bzr.zsh
 (( $+functions[bzr_prompt_info] )) ||
 function bzr_prompt_info {
   source $ZSH/lib/bzr.zsh
   "$0" "$@"
 }
 
+# lib/cli.zsh
+(( $+functions[omz] )) ||
+function omz {
+  source $ZSH/lib/cli.zsh
+  "$0" "$@"
+}
+
+# lib/clipboard.zsh
 (( $+functions[detect-clipboard] )) ||
 function detect-clipboard clipcopy clippaste {
   unfunction detect-clipboard
@@ -207,6 +228,14 @@ function detect-clipboard clipcopy clippaste {
   "$0" "$@"
 }
 
+# lib/compfix.zsh
+(( $+functions[handle_completion_insecurities] )) ||
+function handle_completion_insecurities {
+  source $ZSH/lib/compfix.zsh
+  "$0" "$@"
+}
+
+# lib/functions.zsh
 (( $+functions[open_command] )) ||
 function env_default \
   open_command \
@@ -217,12 +246,36 @@ function env_default \
   "$0" "$@"
 }
 
+# lib/git.zsh
+(( $+functions[git_prompt_info] )) ||
+function git_prompt_info \
+  git_prompt_status \
+  parse_git_dirty \
+  git_remote_status \
+  git_current_branch \
+  git_commits_ahead \
+  git_commits_behind \
+  git_prompt_ahead \
+  git_prompt_behind \
+  git_prompt_remote \
+  git_prompt_short_sha \
+  git_prompt_long_sha \
+  git_current_user_name \
+  git_current_user_email \
+  git_repo_name \
+{
+  source $ZSH/lib/git.zsh
+  "$0" "$@"
+}
+
+# lib/nvm.zsh
 (( $+functions[nvm_prompt_info] )) ||
 function nvm_prompt_info {
   source $ZSH/lib/nvm.zsh
   "$0" "$@"
 }
 
+# lib/prompt_info_functions.zsh
 (( $+functions[rvm_prompt_info] )) ||
 function chruby_prompt_info \
   rbenv_prompt_info \

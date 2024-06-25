@@ -163,15 +163,15 @@ fi
 function run-compinit {
   has-zcompdump-expired && command rm -f "$ZSH_COMPDUMP"
 
-  if [[ -n "$ZSH_DISABLE_COMPFIX" ]] && ! is-true "$ZSH_DISABLE_COMPFIX"; then
+  if [[ -z "$ZSH_DISABLE_COMPFIX" ]] || is-true "$ZSH_DISABLE_COMPFIX"; then
+    # If the user wants it, load from all found directories
+    compinit -u -d "$ZSH_COMPDUMP"
+  else
     source "$ZSH/lib/compfix.zsh"
     # Load only from secure directories
     compinit -i -d "$ZSH_COMPDUMP"
     # If completion insecurities exist, warn the user
     handle_completion_insecurities &|
-  else
-    # If the user wants it, load from all found directories
-    compinit -u -d "$ZSH_COMPDUMP"
   fi
 
   # Compile zcompdump, if modified, in background to increase startup speed.

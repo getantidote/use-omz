@@ -4,13 +4,13 @@
 
 The Zsh plugin manager [antidote][antidote] can be used to load subplugins, such as those included in frameworks like [Oh-My-Zsh][omz]. However, it doesn't have specific logic to treat these popular frameworks different than any other plugin. With projects like Oh-My-Zsh that have a lot of dependencies on itself, and aren't expecting to be loaded any way other than the documented default, that can be a problem.
 
-With Oh-My-Zsh, it's a Rat King of dependencies. You have to know what the OMZ plugin you are using requires and be sure to set up those pre-requisites - setting all the right variables, including all the right libraries, declaring all the right functions, or setting up Zsh completions to work correctly. OMZ can be a real [Rat King](https://en.wikipedia.org/wiki/Rat_king) of dependencies. While antidote documents some of that, it's constantly changing and an unnecessarily complicated process for regular users that just want to use antidote with Oh-My-Zsh together seamlessly.
+With Oh-My-Zsh, it's a [Rat King](https://en.wikipedia.org/wiki/Rat_king) of dependencies. You have to know what each OMZ plugin you are using requires and be sure to include all those pre-requisites - setting all the right variables, including all the right libraries, declaring all the right functions, or setting up Zsh completions to work correctly. While antidote documents some of that, it's constantly changing and an unnecessarily complicated process for regular users that just want to use antidote with Oh-My-Zsh together seamlessly. This project solves all that.
 
-Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this project serves as a bridge. It's not strictly necessary to include [antidote-use-omz](https://github.com/mattmc3/antidote-use-omz) with antidote, it is highly recommended.
+Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this plugin serves as a bridge. It's not strictly necessary to include [antidote-use-omz](https://github.com/mattmc3/antidote-use-omz) with antidote, it is highly recommended.
 
 ## How do I use it?
 
-Simply include this at the top of your antidote `${ZDOTDIR:-$HOME}/.zsh_plugins.txt` file:
+Simply include this plugin FIRST, at the top of your antidote `${ZDOTDIR:-$HOME}/.zsh_plugins.txt` file. To do that, add this line:
 
 ```zsh
 mattmc3/antidote-use-omz

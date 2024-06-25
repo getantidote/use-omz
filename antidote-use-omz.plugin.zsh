@@ -186,6 +186,41 @@ function run-compinit {
 }
 #endregion
 
+#region themes
+function set-omz-theme-during-precmd {
+  # Remove this hook so that it doesn't keep running on every precmd event.
+  add-zsh-hook -d precmd set-omz-theme-during-precmd
+
+  # Return, unless the shell is interactive and ZSH_THEME is set.
+  [[ -o interactive ]] && [[ -n "$ZSH_THEME" ]] || return
+
+  # Load prompt pre-reqs
+  [[ -v FX ]] && [[ -v FG ]] && [[ -v BG ]]  || source $ZSH/lib/spectrum.zsh
+  (( $+function[colors] )) &&
+    [[ -v ZSH_THEME_GIT_PROMPT_PREFIX ]]     || source $ZSH/lib/theme-and-appearance.zsh
+  (( $+function[VCS_INFO_formats] ))         || source $ZSH/lib/vcs_info.zsh
+
+  # Load the theme
+  is_theme() {
+    local base_dir=$1
+    local name=$2
+    builtin test -f $base_dir/$name.zsh-theme
+  }
+
+  # Set prompt
+  if is_theme "$ZSH_CUSTOM" "$ZSH_THEME"; then
+    source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
+  elif is_theme "$ZSH_CUSTOM/themes" "$ZSH_THEME"; then
+    source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
+  elif is_theme "$ZSH/themes" "$ZSH_THEME"; then
+    source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+  else
+    echo "[oh-my-zsh] theme '$ZSH_THEME' not found"
+  fi
+}
+add-zsh-hook precmd set-omz-theme-during-precmd
+#endregion
+
 #region Lazy-loaded OMZ libs
 # Leave for user to decide to load or not:
 # lib/completion.zsh

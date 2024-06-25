@@ -34,28 +34,11 @@ autoload -Uz is-at-least
 # Make sure we know where antidote keeps OMZ.
 () {
   [[ -z "$ZSH" ]] || return
-
-  # OMZ should exist in $ANTIDOTE_HOME/ohmyzsh/ohmyzsh
-  typeset -gH adote_home
-  if [[ -n "$ANTIDOTE_HOME" ]]; then
-    adote_home=$ANTIDOTE_HOME
-  elif is-callable antidote; then
-    adote_home=$(antidote home)
-  elif [[ "${OSTYPE}" == darwin* ]]; then
-    adote_home=$HOME/Library/Caches
-  elif [[ "${OSTYPE}" == (cygwin|msys)* ]]; then
-    adote_home=${LOCALAPPDATA:-$LocalAppData}
-    if type cygpath > /dev/null; then
-      adote_home=$(cygpath "$result")
-    fi
-  elif [[ -n "$XDG_CACHE_HOME" ]]; then
-    adote_home=$XDG_CACHE_HOME
-  else
-    adote_home=$HOME/.cache
+  if ! is-callable antidote; then
+    echo >&2 "antidote-use-omz: antidote command not found."
+    return 1
   fi
-
-  # Set the basic OMZ home variable.
-  export ZSH=$adote_home/ohmyzsh/ohmyzsh
+  export ZSH=$(antidote path ohmyzsh/ohmyzsh)
 }
 
 # Make sure we have Oh-My-Zsh cloned.

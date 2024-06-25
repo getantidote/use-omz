@@ -6,7 +6,7 @@ The Zsh plugin manager [antidote][antidote] can be used to load subplugins, such
 
 With Oh-My-Zsh, it's a [Rat King](https://en.wikipedia.org/wiki/Rat_king) of dependencies. You have to know what each OMZ plugin you are using requires and be sure to include all those pre-requisites - setting all the right variables, including all the right libraries, declaring all the right functions, or setting up Zsh completions to work correctly. While antidote documents some of that, it's constantly changing and an unnecessarily complicated process for regular users that just want to use antidote with Oh-My-Zsh together seamlessly. This project solves all that.
 
-Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this plugin serves as a bridge. It's not strictly necessary to include [antidote-use-omz](https://github.com/mattmc3/antidote-use-omz) with antidote, it is highly recommended.
+Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this plugin serves as a bridge. It's not strictly necessary to use [antidote-use-omz](https://github.com/mattmc3/antidote-use-omz) with antidote, but it is highly recommended.
 
 ## How do I use it?
 
@@ -18,12 +18,23 @@ mattmc3/antidote-use-omz
 
 It's that easy. Now, you can use OMZ plugins without worry.
 
+## Performance
+
+__Q:__ Is this fast? I've heard OMZ is slow.
+<br/>
+__A:__ Absolutely! With antidote, I'm committed to making sure Zsh users have a speedy shell. OMZ has a bit of a reputation for being slow out of the box. This project not only makes working with OMZ's plugins simple, it also adds many performance enhancements like lazy-loading libs, caching, and completion optimizations. See benchmarks for yourself with [zsh-bench].
+
 ## Troubleshooting
 
-Q: What if I find an OMZ plugin that doesn't work?
-A: [Submit an issue here](https://github.com/mattmc3/antidote-use-omz/issues). OMZ specific issues won't be fixed in antidote. This plugin is now the supported way to use antidote correctly with OMZ.
+__Q:__ Do I need to use this plugin if I'm using antidote and OMZ?
+</br>
+__A:__ Not strictly, but this plugin is now the officially supported way to use antidote correctly with OMZ.
 
-## Need more examples?
+__Q:__ What if I find an OMZ plugin that doesn't work?
+</br>
+__A:__ [Submit an issue here](https://github.com/mattmc3/antidote-use-omz/issues). OMZ specific issues won't be fixed within antidote itself, but this project aims to support every OMZ subplugin with antidote.
+
+## Examples
 
 There is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir/tree/ohmyzsh) included with antidote which shows many examples.
 
@@ -88,5 +99,6 @@ zdharma-continuum/fast-syntax-highlighting
 # ... etc ...
 ```
 
-[antidote]:  https://github.com/mattmc3/antidote
-[omz]:       https://github.com/ohmyzsh/ohmyzsh
+[antidote]:   https://github.com/mattmc3/antidote
+[omz]:        https://github.com/ohmyzsh/ohmyzsh
+[zsh-bench]:  https://github.com/romkatv/zsh-bench

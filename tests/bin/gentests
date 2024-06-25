@@ -30,6 +30,7 @@ test_md() {
 EOF
 }
 
+mkdir -p $PRJHOME/tests/gen
 for plugin in $compdef_plugins; do
   if [[ -r $ZSH/plugins/$plugin/${plugin}.plugin.zsh ]]; then
   	test_md $plugin > $PRJHOME/tests/gen/test_${plugin}.md

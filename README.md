@@ -40,11 +40,28 @@ There is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir/tree/
 
 Here's a more complete .zsh_plugins.txt you can use as a starter config.
 
-```zsh
-#
-# ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
-#
+Example `${ZDOTDIR:-$HOME}/.zshrc`:
 
+```zsh
+# Set OMZ variables if you want.
+ZSH_THEME=robbyrussell
+
+# Set any helper functions used by your antidote config.
+function is-macos() {
+  [[ $OSTYPE == darwin* ]]
+}
+
+# Load antidote plugins.
+source /path/to/antidote/antidote.zsh
+antidote load
+
+# Customize
+# ... add your other customizations ...
+```
+
+Example `${ZDOTDIR:-$HOME}/.zsh_plugins.txt`:
+
+```zsh
 # If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you
 # don't have to worry about whether OMZ will work correctly.
 mattmc3/antidote-use-omz
@@ -69,8 +86,6 @@ ohmyzsh/ohmyzsh path:plugins/extract
 ohmyzsh/ohmyzsh path:plugins/globalias
 ohmyzsh/ohmyzsh path:plugins/magic-enter
 ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
-ohmyzsh/ohmyzsh path:plugins/git
-ohmyzsh/ohmyzsh path:plugins/ruby
 ohmyzsh/ohmyzsh path:plugins/otp
 ohmyzsh/ohmyzsh path:plugins/zoxide
 
@@ -84,9 +99,6 @@ ohmyzsh/ohmyzsh path:plugins/rails
 # Add macOS specific plugins
 ohmyzsh/ohmyzsh path:plugins/brew conditional:is-macos
 ohmyzsh/ohmyzsh path:plugins/macos conditional:is-macos
-
-# Add a nice prompt
-romkatv/powerlevel10k
 
 # Add binary utils
 romkatv/zsh-bench kind:path

@@ -38,9 +38,9 @@ __A:__ [Submit an issue here](https://github.com/mattmc3/antidote-use-omz/issues
 
 There is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir/tree/ohmyzsh) included with antidote which shows many examples.
 
-Here's a more complete .zsh_plugins.txt you can use as a starter config.
+Here's a more simple starter config to get you going.
 
-Example `${ZDOTDIR:-$HOME}/.zshrc`:
+### Example `${ZDOTDIR:-$HOME}/.zshrc`:
 
 ```zsh
 # Set OMZ variables if you want.
@@ -59,7 +59,7 @@ antidote load
 # ... add your other customizations ...
 ```
 
-Example `${ZDOTDIR:-$HOME}/.zsh_plugins.txt`:
+### Example `${ZDOTDIR:-$HOME}/.zsh_plugins.txt`:
 
 ```zsh
 # If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you

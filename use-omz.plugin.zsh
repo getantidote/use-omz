@@ -1,5 +1,5 @@
 #
-# antidote-use-omz: A Zsh plugin to make using Oh-My-Zsh with antidote easier.
+# use-omz: A Zsh plugin to make using Oh-My-Zsh with antidote easier.
 #
 
 # References:
@@ -39,14 +39,14 @@ fi
   if (( $+commands[antidote] || $+functions[antidote] )); then
     export ZSH=$(antidote path ohmyzsh/ohmyzsh)
   else
-    echo >&2 "antidote-use-omz: antidote command not found."
+    echo >&2 "use-omz: antidote command not found."
     return 1
   fi
 }
 
 # Make sure we have Oh-My-Zsh cloned.
 if [[ ! -d $ZSH ]]; then
-  echo >&2 "antidote-use-omz: oh-my-zsh not found, or \$ZSH not properly set."
+  echo >&2 "use-omz: oh-my-zsh not found, or \$ZSH not properly set."
   return 1
 fi
 #endregion

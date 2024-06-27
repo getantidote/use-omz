@@ -116,7 +116,7 @@ Also, there is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir
 
 __Q:__ Do I need to load Oh-My-Zsh's lib directory (`ohmyzsh/ohmyzsh path:lib`)?
 
-__A:__ The short answer is no, you do NOT need to explicitly load all of lib, or really any of lib. If you use `getantidote/use-omz`, it is really clever, and knows all about lib. It will actually try to lazy-load things as needed when you use OMZ plugins that require things from lib. So, in general, you may choose to skip lib or load individual lib files as needed. Yea!
+__A:__ The short answer is no, you do **NOT** need to explicitly load all of lib, or really _any_ of lib. If you use `getantidote/use-omz`, it is really clever, and knows all about lib. It will actually try to lazy-load things as needed when you use OMZ plugins that require things from lib. So, in general, you may choose to skip lib or load individual lib files as needed. Yea!
 
 **HOWEVER** - there are a few caveats.
 

@@ -36,9 +36,7 @@ __A:__ [Submit an issue here](https://github.com/getantidote/use-omz/issues). OM
 
 ## Examples
 
-There is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir/tree/ohmyzsh) included with antidote which shows many examples.
-
-Here's a more simple starter config to get you going.
+Here's a simple starter config to get you going.
 
 ### Example `${ZDOTDIR:-$HOME}/.zshrc`:
 
@@ -111,6 +109,8 @@ zdharma-continuum/fast-syntax-highlighting
 
 # ... etc ...
 ```
+
+Also, there is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir/tree/ohmyzsh) included with antidote which shows many examples.
 
 ## Differences
 

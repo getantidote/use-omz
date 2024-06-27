@@ -64,13 +64,16 @@ antidote load
 # don't have to worry about whether OMZ will work correctly.
 getantidote/use-omz
 
-# Regarding OMZ libs - you may decide to use all of OMZ's lib like so:
+# Regarding OMZ libs - you may choose to use all of OMZ's lib like so:
 #   ohmyzsh/ohmyzsh path:lib
-#
-# -OR-, if you really know what you want and nothing else, you might be able to
+# -OR-
+# If you really know what you want and nothing else, you might be able to
 # choose only the specific libs you need:
 #   ohmyzsh/ohmyzsh path:lib/clipboard.zsh
-#
+#   ohmyzsh/ohmyzsh path:lib/history.zsh
+#   ohmyzsh/ohmyzsh path:lib/completion.zsh
+# -OR-
+# You may decide not to load anything from lib at all.
 
 # Let's go ahead and use all of Oh My Zsh's lib directory.
 ohmyzsh/ohmyzsh path:lib

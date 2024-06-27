@@ -21,7 +21,7 @@ test_md() {
 \`\`\`zsh
 % source ./tests/__init__.zsh
 % t_setup
-% source use-omz.plugin.zsh
+% source use-omz.zsh
 % source \$ZSH/lib/*.zsh
 % plugin-load $plugin 2>&1 | subenv ZSH
 % t_teardown

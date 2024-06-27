@@ -1,4 +1,4 @@
-# antidote-use-omz
+# use-omz
 
 > A Zsh plugin to make using Oh-My-Zsh with antidote seamless.
 
@@ -6,14 +6,14 @@ The Zsh plugin manager [antidote][antidote] can be used to load subplugins, such
 
 With OMZ, you have to know what each OMZ plugin you are using requires and be sure to include all those pre-requisites - setting all the right variables, including all the right libraries, declaring all the right functions, or setting up Zsh completions to work correctly. It become quite the dependency [Rat King](https://en.wikipedia.org/wiki/Rat_king). And, the project is popular and constantly evolving, making using OMZ with antidote an unnecessarily complicated process for regular users that just want them to work together seamlessly. This project aims to solve all that.
 
-Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this simple plugin serves as a bridge. It's not strictly necessary to use [antidote-use-omz](https://github.com/mattmc3/antidote-use-omz) with antidote, but it really helps, and is highly recommended.
+Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this simple plugin serves as a bridge. It's not strictly necessary to use [use-omz](https://github.com/getantidote/use-omz) with antidote, but it really helps, and is highly recommended.
 
 ## How do I use it?
 
 Simply include this plugin FIRST, at the top of your antidote `${ZDOTDIR:-$HOME}/.zsh_plugins.txt` file. To do that, add this line:
 
 ```zsh
-mattmc3/antidote-use-omz
+getantidote/use-omz
 ```
 
 It's that easy. Now, you can use OMZ plugins without worry.
@@ -32,7 +32,7 @@ __A:__ Not strictly, but this plugin is now the officially supported way to use 
 
 __Q:__ What if I find an OMZ plugin that doesn't work?
 </br>
-__A:__ [Submit an issue here](https://github.com/mattmc3/antidote-use-omz/issues). OMZ specific issues won't be fixed within antidote itself, but this project aims to support every OMZ subplugin with antidote.
+__A:__ [Submit an issue here](https://github.com/getantidote/use-omz/issues). OMZ specific issues won't be fixed within antidote itself, but this project aims to support every OMZ subplugin with antidote.
 
 ## Examples
 
@@ -64,7 +64,7 @@ antidote load
 ```zsh
 # If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you
 # don't have to worry about whether OMZ will work correctly.
-mattmc3/antidote-use-omz
+getantidote/use-omz
 
 # Regarding OMZ libs - you may decide to use all of OMZ's lib like so:
 #   ohmyzsh/ohmyzsh path:lib
@@ -114,11 +114,11 @@ zdharma-continuum/fast-syntax-highlighting
 
 ## Differences
 
-A quick note on differences in behavior between OMZ and antidote-use-omz:
+A quick note on differences in behavior between OMZ and use-omz:
 
-- Oh-My-Zsh by default checks the security of directories in `fpath` when running `compinit`. This feature can cause slower performance, and can be disabled by setting `ZSH_DISABLE_COMPFIX=true`. If `ZSH_DISABLE_COMPFIX` isn't set at all, the default audit is performed. antidote-use-omz reverses this default behavior, so to re-enable it you should explicitly set `ZSH_DISABLE_COMPFIX=false`.
+- Oh-My-Zsh by default checks the security of directories in `fpath` when running `compinit`. This feature can cause slower performance, and can be disabled by setting `ZSH_DISABLE_COMPFIX=true`. If `ZSH_DISABLE_COMPFIX` isn't set at all, the default audit is performed. use-omz reverses this default behavior, so to re-enable it you should explicitly set `ZSH_DISABLE_COMPFIX=false`.
 
-- Oh-My-Zsh by default embeds metadata information in the `$ZSH_COMPDUMP` file. The way it does this is slow, so antidote-use-omz saves metadata in a separate cache file as a performance optimization.
+- Oh-My-Zsh by default embeds metadata information in the `$ZSH_COMPDUMP` file. The way it does this is slow, so use-omz saves metadata in a separate cache file as a performance optimization.
 
 [antidote]:   https://github.com/mattmc3/antidote
 [omz]:        https://github.com/ohmyzsh/ohmyzsh

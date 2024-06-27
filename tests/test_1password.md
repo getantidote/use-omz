@@ -15,7 +15,7 @@ $ZSH/plugins/1password/1password.plugin.zsh:6: command not found: compdef
 ```
 
 ```zsh
-% source antidote-use-omz.plugin.zsh
+% source use-omz.plugin.zsh
 % plugin-load 1password
 %
 ```

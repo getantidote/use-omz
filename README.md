@@ -112,6 +112,22 @@ zdharma-continuum/fast-syntax-highlighting
 
 Also, there is a sample [ZDOTDIR project](https://github.com/getantidote/zdotdir/tree/ohmyzsh) included with antidote which shows many examples.
 
+## FAQ:
+
+__Q:__ Do I need to load Oh-My-Zsh's lib directory (`ohmyzsh/ohmyzsh path:lib`)?
+
+__A:__ The short answer is no, you do NOT need to explicitly load all of lib, or really any of lib. If you use `getantidote/use-omz`, it is really clever, and knows all about lib. It will actually try to lazy-load things as needed when you use OMZ plugins that require things from lib. So, in general, you may choose to skip lib or load individual lib files as needed. Yea!
+
+**HOWEVER** - there are a few caveats.
+
+First, Zsh has some really bad defaults out of the box. `zstyles` for completions aren't set. History variables like `HISTSIZE` and `SAVEHIST` are set to inappropriately tiny values. Expected keybindings are missing. Useful Zsh `setopt` values aren't enabled. Builtins like `ls` and `grep` are missing colorizers and other useful flags.
+
+OMZ's lib does a whole lot to improve the overall Zsh experience. Of course, you can also accomplish all that by finding other plugins. ([belak/zsh-utils](https://github.com/belak/zsh-utils) is a great alternative!) For most users used to OMZ, or for newbies however, I highly recommend just keeping lib - it's overall much easier.
+
+Second, OMZ is a very dynamic project I have absolutely no control over. What works today might break tomorrow. So if some new dependency in lib is introduced, `use-omz` may miss it - at least for the short term. If that happens, [submit an issue](https://github.com/getantidote/use-omz/issues) and I'll try to fix! PRs also welcome. If you choose to load all of lib with antidote, you avoid most that risk of future breakage.
+
+Ultimately, I want the choice to be the user's, so `use-omz` doesn't assume you want lib and load it automatically, but if things are needed they will load.
+
 ## Differences
 
 A quick note on differences in behavior between OMZ and use-omz:

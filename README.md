@@ -126,7 +126,7 @@ OMZ's lib does a whole lot to improve the overall Zsh experience. Of course, you
 
 Second, OMZ is a very dynamic project I have absolutely no control over. What works today might break tomorrow. So if some new dependency in lib is introduced, `use-omz` may miss it - at least for the short term. If that happens, [submit an issue](https://github.com/getantidote/use-omz/issues) and I'll try to fix! PRs also welcome. If you choose to load all of lib with antidote, you avoid most that risk of future breakage.
 
-Ultimately, I want the choice to be the user's. `use-omz` doesn't assume you want lib and won't load it automatically, but if things are needed they will lazy-load. And in general, I recommend for users of antidote and Oh-My-Zsh to do this:
+Ultimately, I want the choice to be the user's. `use-omz` doesn't assume you want lib and won't load it automatically, but if things are needed they will lazy-load. But in general, I recommend users of antidote and Oh-My-Zsh to do this:
 
 ```zsh
 # .zsh_plugins.txt

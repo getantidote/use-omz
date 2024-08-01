@@ -181,6 +181,7 @@ function run-compinit {
   {
     if [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]]; then
       if command mkdir "${ZSH_COMPDUMP}.lock" 2>/dev/null; then
+        autoload -Uz zcompile zrecompile
         zrecompile -q -p "$ZSH_COMPDUMP"
         command rm -rf "${ZSH_COMPDUMP}.zwc.old" "${ZSH_COMPDUMP}.lock" 2>/dev/null
       fi

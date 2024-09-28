@@ -152,7 +152,7 @@ if [[ -z "$SHORT_HOST" ]]; then
   # Figure out the SHORT hostname
   if [[ "$OSTYPE" = darwin* ]]; then
     # macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.
-    SHORT_HOST=$(scutil --get ComputerName 2>/dev/null) || SHORT_HOST="${HOST/.*/}"
+    SHORT_HOST=$(scutil --get LocalHostName 2>/dev/null) || SHORT_HOST="${HOST/.*/}"
   else
     SHORT_HOST="${HOST/.*/}"
   fi
@@ -181,7 +181,7 @@ function run-compinit {
   {
     if [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]]; then
       if command mkdir "${ZSH_COMPDUMP}.lock" 2>/dev/null; then
-        autoload -Uz zcompile zrecompile
+        autoload -U zrecompile
         zrecompile -q -p "$ZSH_COMPDUMP"
         command rm -rf "${ZSH_COMPDUMP}.zwc.old" "${ZSH_COMPDUMP}.lock" 2>/dev/null
       fi

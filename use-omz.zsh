@@ -198,6 +198,13 @@ function set-omz-theme-during-precmd {
   # Return, unless the shell is interactive and ZSH_THEME is set.
   [[ -o interactive ]] && [[ -n "$ZSH_THEME" ]] || return
 
+  # Save user aliases
+  local -A aliases_pre
+  local key val
+  for key in 'ls' 'foo'; do
+    [[ -v aliases[$key] ]] && aliases_pre[$key]=$aliases[$key]
+  done
+
   # Load prompt pre-reqs
   (( $+functions[_omz_register_handler] ))   || source $ZSH/lib/async_prompt.zsh
   [[ -v FX ]] && [[ -v FG ]] && [[ -v BG ]]  || source $ZSH/lib/spectrum.zsh
@@ -222,6 +229,11 @@ function set-omz-theme-during-precmd {
   else
     echo "[oh-my-zsh] theme '$ZSH_THEME' not found"
   fi
+
+  # Reset user aliases
+  for key val in ${(kv)aliases_pre}; do
+    aliases[$key]="$val"
+  done
 }
 add-zsh-hook precmd set-omz-theme-during-precmd
 #endregion

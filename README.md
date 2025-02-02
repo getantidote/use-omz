@@ -2,11 +2,11 @@
 
 > A Zsh plugin to make using Oh-My-Zsh with antidote seamless.
 
-The Zsh plugin manager [antidote][antidote] can be used to load subplugins, such as those included in frameworks like Prezto and [Oh-My-Zsh][omz]. However, it doesn't have specific logic to treat these popular frameworks different than any other plugin. With projects like Oh-My-Zsh (aka: OMZ) that have a lot of dependencies on itself, and aren't expecting to be loaded any way other than the documented default, that can be a problem.
+The Zsh plugin manager [antidote][antidote] can be used to load subplugins, such as those included in frameworks like Prezto and [Oh-My-Zsh][omz]. However, it doesn't have specific logic to treat these popular frameworks different than any other plugin. Projects like Oh-My-Zsh (aka: OMZ) have a lot of dependencies on itself, and aren't expecting to be loaded any way other than the documented default. That can be a problem.
 
-With OMZ, you have to know what each OMZ plugin you are using requires and be sure to include all those pre-requisites - setting all the right variables, including all the right libraries, declaring all the right functions, or setting up Zsh completions to work correctly. It become quite the dependency [Rat King](https://en.wikipedia.org/wiki/Rat_king). And, the project is popular and constantly evolving, making using OMZ with antidote an unnecessarily complicated process for regular users that just want them to work together seamlessly. This project aims to solve all that.
+With OMZ, you have to know what each OMZ plugin you are using requires and be sure to include all those pre-requisites - setting all the right variables, including all the right libraries, declaring all the right functions, or setting up Zsh completions to work correctly. It is quite the dependency [Rat King](https://en.wikipedia.org/wiki/Rat_king). And, the project is popular and constantly evolving, making using OMZ with antidote an unnecessarily complicated process for regular users that just want them to work together seamlessly. This project aims to solve all that.
 
-Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this simple plugin serves as a bridge. It's not strictly necessary to use [use-omz](https://github.com/getantidote/use-omz) with antidote, but it really helps, and is highly recommended.
+Since [antidote][antidote] is intended to be a general-purpose, high performance Zsh plugin manager without added complexity or special handling of frameworks like OMZ, this simple plugin serves as a bridge. It's not strictly necessary to use [use-omz](https://github.com/getantidote/use-omz) with antidote, but it helps with many aspects, and is highly recommended.
 
 ## How do I use it?
 

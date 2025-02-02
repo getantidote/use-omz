@@ -201,7 +201,7 @@ function set-omz-theme-during-precmd {
   # Save user aliases
   local -A aliases_pre
   local key val
-  for key in 'ls' 'foo'; do
+  for key in 'ls'; do
     [[ -v aliases[$key] ]] && aliases_pre[$key]=$aliases[$key]
   done
 

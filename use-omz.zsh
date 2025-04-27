@@ -35,20 +35,48 @@ fi
 #region Set $ZSH
 # Make sure we know where antidote keeps OMZ.
 () {
-  [[ -z "$ZSH" ]] || return
+  emulate -L zsh; setopt local_options
+
+  # If ZSH is already set, we're good
+  [[ -z "$ZSH" ]] || return 0
   if (( $+commands[antidote] || $+functions[antidote] )); then
     export ZSH=$(antidote path ohmyzsh/ohmyzsh)
+    return 0
+  fi
+
+  # antidote isn't loaded, but we may still be able to figure out where
+  # ohmyzsh was cloned. First, get antidote_home
+  local antidote_home="$ANTIDOTE_HOME"
+  if [[ -z "$antidote_home" ]]; then
+    local cachedir
+    if [[ "${OSTYPE}" == darwin* ]]; then
+      cachedir=$HOME/Library/Caches
+    elif [[ "${OSTYPE}" == (cygwin|msys)* ]]; then
+      cachedir=${LOCALAPPDATA:-$LocalAppData}
+      if type cygpath > /dev/null; then
+        cachedir=$(cygpath "$result")
+      fi
+    elif [[ -n "$XDG_CACHE_HOME" ]]; then
+      cachedir=$XDG_CACHE_HOME
+    else
+      cachedir=$HOME/.cache
+    fi
+    antidote_home="$cachedir/antidote"
+  fi
+
+  local -a omz_paths=(
+    "$antidote_home"/ohmyzsh/ohmyzsh(/N)
+    "$antidote_home"/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh(/N)
+  )
+
+  if (( $#omz_paths )); then
+    export ZSH="${omz_paths[1]}"
   else
-    echo >&2 "use-omz: antidote command not found."
+    print -ru2 -- "use-omz: Oh-My-Zsh directory not found. Cannot set \$ZSH variable."
+    print -ru2 -- "Set \$ZSH manually in your .zshrc, or clone ohmyzsh/ohmyzsh with antidote."
     return 1
   fi
-}
-
-# Make sure we have Oh-My-Zsh cloned.
-if [[ ! -d $ZSH ]]; then
-  echo >&2 "use-omz: oh-my-zsh not found, or \$ZSH not properly set."
-  return 1
-fi
+} || return 1
 #endregion
 
 #region OMZ core variables

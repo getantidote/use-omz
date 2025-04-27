@@ -39,8 +39,15 @@ fi
 
   # If ZSH is already set, we're good
   [[ -z "$ZSH" ]] || return 0
+
+  local omzdir
   if (( $+commands[antidote] || $+functions[antidote] )); then
-    export ZSH=$(antidote path ohmyzsh/ohmyzsh)
+    omzdir=$(antidote path ohmyzsh/ohmyzsh 2>/dev/null)
+    if [[ -z "$omzdir" ]]; then
+      antidote bundle 'ohmyzsh/ohmyzsh kind:clone' &>/dev/null
+      omzdir=$(antidote path ohmyzsh/ohmyzsh 2>/dev/null)
+    fi
+    export ZSH="$omzdir"
     return 0
   fi
 
@@ -68,15 +75,19 @@ fi
     "$antidote_home"/ohmyzsh/ohmyzsh(/N)
     "$antidote_home"/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh(/N)
   )
-
   if (( $#omz_paths )); then
     export ZSH="${omz_paths[1]}"
   else
-    print -ru2 -- "use-omz: Oh-My-Zsh directory not found. Cannot set \$ZSH variable."
-    print -ru2 -- "Set \$ZSH manually in your .zshrc, or clone ohmyzsh/ohmyzsh with antidote."
     return 1
   fi
-} || return 1
+}
+
+# Make sure we have a valid Oh-My-Zsh directory.
+if [[ ! -d "$ZSH" ]]; then
+  print -ru2 -- "use-omz: Oh-My-Zsh directory not found. Cannot set \$ZSH variable."
+  print -ru2 -- "Set \$ZSH manually in your .zshrc, or clone ohmyzsh/ohmyzsh with antidote."
+  return 1
+fi
 #endregion
 
 #region OMZ core variables

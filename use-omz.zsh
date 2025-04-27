@@ -105,6 +105,11 @@ mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 #endregion
 
+#region OMZ self-update
+# Check for updates on initial load...
+source "$ZSH/tools/check_for_upgrade.sh"
+#endregion
+
 #region Defer compinit and queue completion commands
 # Define wrapper functions for completion commands so we can queue up calls to them.
 # That way after compinit is called for real, we can play back the queue.

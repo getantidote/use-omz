@@ -41,7 +41,7 @@ fi
   [[ -z "$ZSH" ]] || return 0
 
   local omzdir
-  if (( $+commands[antidote] || $+functions[antidote] )); then
+  if [[ "${+commands[antidote]}" -gt 0 || "${+functions[antidote]}" -gt 0 ]]; then
     omzdir=$(antidote path ohmyzsh/ohmyzsh 2>/dev/null)
     if [[ -z "$omzdir" ]]; then
       antidote bundle 'ohmyzsh/ohmyzsh kind:clone' &>/dev/null
@@ -75,7 +75,7 @@ fi
     "$antidote_home"/ohmyzsh/ohmyzsh(/N)
     "$antidote_home"/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh(/N)
   )
-  if (( $#omz_paths )); then
+  if [[ "${#omz_paths}" -gt 0 ]]; then
     export ZSH="${omz_paths[1]}"
   else
     return 1
@@ -117,7 +117,7 @@ source "$ZSH/tools/check_for_upgrade.sh"
 typeset -gHa __compcmd_queue=()
 function queued_compcmd compdef {
   0=${(%):-%N}
-  if (( $# )); then
+  if [[ "$#" -gt 0 ]]; then
     local -a args=("${@[@]}")
     __compcmd_queue+=("$(typeset -p args); $0 \$args")
   else
@@ -154,7 +154,7 @@ function compinit compinit_deferred {
 autoload -Uz add-zsh-hook
 function ensure-compinit-during-precmd {
   # If the shell is interactive, ensure compinit runs before the first command.
-  if [[ -o interactive ]] && (( $+functions[compinit_deferred] )); then
+  if [[ -o interactive ]] && [[ "${+functions[compinit_deferred]}" -gt 0 ]]; then
     run-compinit
   fi
 
@@ -246,15 +246,15 @@ function set-omz-theme-during-precmd {
   local -A aliases_pre
   local key val
   for key in 'ls'; do
-    [[ -v aliases[$key] ]] && aliases_pre[$key]=$aliases[$key]
+    [[ -n "${aliases[$key]:-}" ]] && aliases_pre[$key]=$aliases[$key]
   done
 
   # Load prompt pre-reqs
-  (( $+functions[_omz_register_handler] ))   || source $ZSH/lib/async_prompt.zsh
-  [[ -v FX ]] && [[ -v FG ]] && [[ -v BG ]]  || source $ZSH/lib/spectrum.zsh
-  (( $+function[colors] )) &&
-    [[ -v ZSH_THEME_GIT_PROMPT_PREFIX ]]     || source $ZSH/lib/theme-and-appearance.zsh
-  (( $+function[VCS_INFO_formats] ))         || source $ZSH/lib/vcs_info.zsh
+  [[ "${+functions[_omz_register_handler]}" -gt 0 ]]              || source $ZSH/lib/async_prompt.zsh
+  [[ -n "${FX:-}" ]] && [[ -n "${FG:-}" ]] && [[ -n "${BG:-}" ]]  || source $ZSH/lib/spectrum.zsh
+  [[ "${+function[colors]}" -gt 0 ]] &&
+    [[ -n "${ZSH_THEME_GIT_PROMPT_PREFIX:-}" ]]                   || source $ZSH/lib/theme-and-appearance.zsh
+  [[ "${+function[VCS_INFO_formats]}" -gt 0 ]]                    || source $ZSH/lib/vcs_info.zsh
 
   # Load the theme
   is_theme() {
@@ -295,28 +295,28 @@ add-zsh-hook precmd set-omz-theme-during-precmd
 # lib/termsupport.zsh
 
 # lib/async_prompt.zsh
-(( $+functions[_omz_register_handler] )) ||
+[[ "${+functions[_omz_register_handler]}" -gt 0 ]] ||
 function _omz_register_handler _omz_async_request _omz_async_callback {
   source $ZSH/lib/async_prompt.zsh
   "$0" "$@"
 }
 
 # lib/bzr.zsh
-(( $+functions[bzr_prompt_info] )) ||
+[[ "${+functions[bzr_prompt_info]}" -gt 0 ]] ||
 function bzr_prompt_info {
   source $ZSH/lib/bzr.zsh
   "$0" "$@"
 }
 
 # lib/cli.zsh
-(( $+functions[omz] )) ||
+[[ "${+functions[omz]}" -gt 0 ]] ||
 function omz {
   source $ZSH/lib/cli.zsh
   "$0" "$@"
 }
 
 # lib/clipboard.zsh
-(( $+functions[detect-clipboard] )) ||
+[[ "${+functions[detect-clipboard]}" -gt 0 ]] ||
 function detect-clipboard clipcopy clippaste {
   unfunction detect-clipboard
   source $ZSH/lib/clipboard.zsh
@@ -325,14 +325,14 @@ function detect-clipboard clipcopy clippaste {
 }
 
 # lib/compfix.zsh
-(( $+functions[handle_completion_insecurities] )) ||
+[[ "${+functions[handle_completion_insecurities]}" -gt 0 ]] ||
 function handle_completion_insecurities {
   source $ZSH/lib/compfix.zsh
   "$0" "$@"
 }
 
 # lib/functions.zsh
-(( $+functions[open_command] )) ||
+[[ "${+functions[open_command]}" -gt 0 ]] ||
 function env_default \
   open_command \
   omz_urldecode \
@@ -343,7 +343,7 @@ function env_default \
 }
 
 # lib/git.zsh
-(( $+functions[git_prompt_info] )) ||
+[[ "${+functions[git_prompt_info]}" -gt 0 ]] ||
 function git_prompt_info \
   git_prompt_status \
   parse_git_dirty \
@@ -360,20 +360,20 @@ function git_prompt_info \
   git_current_user_email \
   git_repo_name \
 {
-  (( $+functions[_omz_register_handler] )) || source $ZSH/lib/async_prompt.zsh
+  [[ "${+functions[_omz_register_handler]}" -gt 0 ]] || source $ZSH/lib/async_prompt.zsh
   source $ZSH/lib/git.zsh
   "$0" "$@"
 }
 
 # lib/nvm.zsh
-(( $+functions[nvm_prompt_info] )) ||
+[[ "${+functions[nvm_prompt_info]}" -gt 0 ]] ||
 function nvm_prompt_info {
   source $ZSH/lib/nvm.zsh
   "$0" "$@"
 }
 
 # lib/prompt_info_functions.zsh
-(( $+functions[rvm_prompt_info] )) ||
+[[ "${+functions[rvm_prompt_info]}" -gt 0 ]] ||
 function chruby_prompt_info \
   rbenv_prompt_info \
   hg_prompt_info \

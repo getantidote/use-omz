@@ -252,9 +252,9 @@ function set-omz-theme-during-precmd {
   # Load prompt pre-reqs
   [[ "${+functions[_omz_register_handler]}" -gt 0 ]]              || source $ZSH/lib/async_prompt.zsh
   [[ -n "${FX:-}" ]] && [[ -n "${FG:-}" ]] && [[ -n "${BG:-}" ]]  || source $ZSH/lib/spectrum.zsh
-  [[ "${+function[colors]}" -gt 0 ]] &&
+  [[ "${+functions[colors]}" -gt 0 ]] &&
     [[ -n "${ZSH_THEME_GIT_PROMPT_PREFIX:-}" ]]                   || source $ZSH/lib/theme-and-appearance.zsh
-  [[ "${+function[VCS_INFO_formats]}" -gt 0 ]]                    || source $ZSH/lib/vcs_info.zsh
+  [[ "${+functions[VCS_INFO_formats]}" -gt 0 ]]                   || source $ZSH/lib/vcs_info.zsh
 
   # Load the theme
   is_theme() {

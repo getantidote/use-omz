@@ -72,6 +72,7 @@ fi
   fi
 
   local -a omz_paths=(
+    "$antidote_home"/github.com/ohmyzsh/ohmyzsh(/N)
     "$antidote_home"/ohmyzsh/ohmyzsh(/N)
     "$antidote_home"/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh(/N)
   )

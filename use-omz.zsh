@@ -37,8 +37,10 @@ fi
 () {
   emulate -L zsh; setopt local_options
 
-  # If ZSH is already set, we're good
-  [[ -z "$ZSH" ]] || return 0
+  # If ZSH is already set and it exists, we're good
+  if [[ -d "${ZSH:-?}" ]] || [[ -L "${ZSH:-?}" ]]; then
+    return 0
+  fi
 
   local omzdir
   if [[ "${+commands[antidote]}" -gt 0 || "${+functions[antidote]}" -gt 0 ]]; then

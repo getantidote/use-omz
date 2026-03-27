@@ -24,6 +24,9 @@ typeset -gU fpath
 # OMZ uses this extensively
 autoload -Uz is-at-least
 
+# Sets color variable such as $fg, $bg, $color and $reset_color
+autoload -U colors && colors
+
 ### BUGFIX:
 # OMZ has current regression: https://github.com/ohmyzsh/ohmyzsh/issues/12328#issuecomment-2043492331
 # If async isn't explicitly set to 'yes', make it 'no' for now.
